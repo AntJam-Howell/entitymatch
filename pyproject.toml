@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "entitymatch"
-version = "0.1.0"
+version = "0.1.1"
 description = "Semantic entity matching with geographic blocking and LLM validation"
 readme = "README.md"
 license = "MIT"

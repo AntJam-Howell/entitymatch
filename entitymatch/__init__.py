@@ -12,7 +12,7 @@ from entitymatch.match import load_model, encode_names, compute_similarity
 from entitymatch.llm_validate import validate_matches, validate_pair
 from entitymatch.pipeline import match_entities, EntityMatcher
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "clean_name",
