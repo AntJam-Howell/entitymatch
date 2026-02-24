@@ -182,7 +182,7 @@ from entitymatch.llm_validate import validate_matches, validate_pair
 from entitymatch.utils import apply_acceptance_criteria
 
 # Clean a single name
-clean_name("McDonald's Corp.")  # → "MCDONALDS"
+clean_name("McDonald's Corp.")  # → "MCDONALD S"
 
 # Prepare a dataframe
 df = prepare_dataframe(raw_df, name_col="company", city_col="city", state_col="state")
