@@ -140,36 +140,44 @@ def blocked_match(
         if not rows:
             continue
 
+        # Use distinct internal column names for left/right names to avoid
+        # collisions when left_name_col and right_name_col are identical.
+        _lname = "__left_name"
+        _rname = "__right_name"
+
         cand = pd.DataFrame(
-            rows, columns=[left_name_col, block_col, "score", right_name_col]
+            rows, columns=[_lname, block_col, "score", _rname]
         )
 
-        # Join back IDs and original names from left side
+        # Join back IDs from left side
         left_info = left_blk[[left_id_col, left_name_col, block_col]].drop_duplicates(
             subset=[left_name_col, block_col]
         )
-        cand = cand.merge(left_info, on=[left_name_col, block_col], how="left")
+        cand = cand.merge(
+            left_info.rename(columns={left_name_col: _lname}),
+            on=[_lname, block_col], how="left",
+        )
 
-        # Join back IDs and original names from right side
+        # Join back IDs from right side
         right_info = right_blk[
             [right_id_col, right_name_col, block_col]
         ].drop_duplicates(subset=[right_name_col, block_col])
-        # Avoid column name collision if left and right name cols are the same
-        right_merge_col = right_name_col
         cand = cand.merge(
-            right_info, on=[right_merge_col, block_col], how="left",
+            right_info.rename(columns={right_name_col: _rname}),
+            on=[_rname, block_col], how="left",
             suffixes=("_left", "_right"),
         )
 
-        # Resolve ID column names after merge
+        # Resolve ID column names after merge (suffixed when both sides
+        # share the same id column name, e.g. "entity_id").
         lid = left_id_col if left_id_col in cand.columns else f"{left_id_col}_left"
         rid = right_id_col if right_id_col in cand.columns else f"{right_id_col}_right"
 
         part = pd.DataFrame({
             "left_id": cand[lid],
             "right_id": cand[rid],
-            "left_name": cand[left_name_col] if left_name_col in cand.columns else cand.get(f"{left_name_col}_left", ""),
-            "right_name": cand[right_merge_col] if right_merge_col in cand.columns else cand.get(f"{right_merge_col}_right", ""),
+            "left_name": cand[_lname],
+            "right_name": cand[_rname],
             "score": cand["score"],
             "block": blk,
         })
