@@ -238,6 +238,10 @@ is_match = validate_pair("McDonalds", "McDonald's Corporation", similarity=0.82,
 - LLM validation adds cost and latency
 - Embedding model quality depends on entity name characteristics
 
+## Acknowledgments
+
+This package was developed with support from the National Science Foundation under Collaborative Research EAGER awards [#2431853](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2431853) and [#2431854](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2431854). The entity matching methodology was developed as part of collaborative research with Maryann Feldman (Arizona State University) and Lauren Lanahan (University of Oregon).
+
 ## License
 
 MIT
