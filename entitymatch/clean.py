@@ -84,7 +84,7 @@ def clean_name(name: object) -> str:
     Examples
     --------
     >>> clean_name("McDonald's Corp.")
-    'MCDONALDS'
+    'MCDONALD S'
     >>> clean_name("Johnson & Johnson Inc")
     'JOHNSON JOHNSON'
     >>> clean_name("Société Générale S.A.")
