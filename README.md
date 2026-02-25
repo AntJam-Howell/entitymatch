@@ -1,5 +1,8 @@
 # entitymatch
 
+[![PyPI version](https://badge.fury.io/py/entitymatch.svg)](https://pypi.org/project/entitymatch/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A Python package for matching entity records across two datasets using **semantic embeddings**, **geographic blocking**, and optional **LLM-based validation**.
 
 Designed for researchers and data engineers who need to link records across messy, real-world datasets — company names with abbreviations, spelling variations, and inconsistent formatting.
